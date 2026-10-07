@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.8.5, created on 2026-10-07 12:05:00
+/* Smarty version 5.8.5, created on 2026-10-07 12:51:40
   from 'file:category.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.8.5',
-  'unifunc' => 'content_6ac60b3ccb88c0_03676477',
+  'unifunc' => 'content_6ac6162c022dd8_97375000',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8efadf004d15033747f09ae01a1fb00d93e91f8c' => 
     array (
       0 => 'category.tpl',
-      1 => 1791363899,
+      1 => 1791366694,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6ac60b3ccb88c0_03676477 (\Smarty\Template $_smarty_tpl) {
+function content_6ac6162c022dd8_97375000 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/mnt/c/Users/Дмитрий/workspace/smarty-blog/app/views/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_18438291296ac60b3c7d73c5_24463380', 'title');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_10578999336ac6162ba585f5_74277264', 'title');
 ?>
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_11169509346ac60b3c873bb6_44931047', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_16392267636ac6162bae3346_67873431', 'body');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, "layout.tpl", $_smarty_current_dir);
 }
 /* {block 'title'} */
-class Block_18438291296ac60b3c7d73c5_24463380 extends \Smarty\Runtime\Block
+class Block_10578999336ac6162ba585f5_74277264 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/mnt/c/Users/Дмитрий/workspace/smarty-blog/app/views/templates';
@@ -46,7 +46,7 @@ Category <?php echo $_smarty_tpl->getValue('category')->name;
 }
 /* {/block 'title'} */
 /* {block 'body'} */
-class Block_11169509346ac60b3c873bb6_44931047 extends \Smarty\Runtime\Block
+class Block_16392267636ac6162bae3346_67873431 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/mnt/c/Users/Дмитрий/workspace/smarty-blog/app/views/templates';
@@ -54,6 +54,14 @@ $_smarty_current_dir = '/mnt/c/Users/Дмитрий/workspace/smarty-blog/app/vi
 
 	<h1>Category <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('category')->name, ENT_QUOTES, 'UTF-8', true);?>
 </h1>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Category <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('category')->name, ENT_QUOTES, 'UTF-8', true);?>
+</li>
+		</ol>
+	</nav>
+	
 	<p><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('category')->description, ENT_QUOTES, 'UTF-8', true);?>
 </p>
 	<p>
@@ -81,24 +89,25 @@ $_smarty_current_dir = '/mnt/c/Users/Дмитрий/workspace/smarty-blog/app/vi
 				</div>
 			</div>
 		</form>
-		<ul class="list-group">
+		<div class="list-group">
 		<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('articles'), 'article');
 $foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('article')->value) {
 $foreach0DoElse = false;
 ?>
-				<li class="list-group-item"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('article')->name, ENT_QUOTES, 'UTF-8', true);?>
-</li>
+			<a href="/article?id=<?php echo $_smarty_tpl->getValue('article')->id;?>
+" class="list-group-item list-group-item-action"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('article')->name, ENT_QUOTES, 'UTF-8', true);?>
+</a>
 		<?php
 }
 if ($foreach0DoElse) {
 ?>
-			<li class="list-group-item">No articles</li>
+			No articles
 		<?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-		</ul>
+		</div>
 		
 		<?php if ($_smarty_tpl->getValue('pages') > 1) {?>
 			<strong>Pagination:</strong>

@@ -43,7 +43,7 @@ class CategoryController implements Controller
         return [
             'category' => $category,
             'articles' => $articles,
-            'pages' => ceil($total / 2),
+            'pages' => ceil($total / 10),
             'page' => $page,
             'sort' => $sort,
             'order' => $order,

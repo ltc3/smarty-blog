@@ -2,6 +2,13 @@
 {block name=title}Category {$category->name}{/block}
 {block name=body}
 	<h1>Category {$category->name|escape}</h1>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Category {$category->name|escape}</li>
+		</ol>
+	</nav>
+	
 	<p>{$category->description|escape}</p>
 	<p>
 		<h2>Articles:</h2>
@@ -25,13 +32,13 @@
 				</div>
 			</div>
 		</form>
-		<ul class="list-group">
+		<div class="list-group">
 		{foreach from=$articles item=article}
-				<li class="list-group-item">{$article->name|escape}</li>
+			<a href="/article?id={$article->id}" class="list-group-item list-group-item-action">{$article->name|escape}</a>
 		{foreachelse}
-			<li class="list-group-item">No articles</li>
+			No articles
 		{/foreach}
-		</ul>
+		</div>
 		
 		{if $pages gt 1}
 			<strong>Pagination:</strong>

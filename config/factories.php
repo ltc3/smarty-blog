@@ -42,6 +42,7 @@ return [
         $app->get(ArticleRepository::class),
     ),
     ArticleController::class => fn(Application $app) => new ArticleController(
+        $app->get(CategoryRepository::class),
         $app->get(ArticleRepository::class),
     ),
 ];

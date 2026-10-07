@@ -25,6 +25,15 @@ class CategoryRepository extends Repository
     }
     
     /**
+     * @param int $articleId
+     * @return iterable
+     */
+    public function findByArticle(int $articleId): iterable
+    {
+        return $this->findMany('SELECT c.* FROM categories c INNER JOIN categories_articles ca ON ca.category_id = c.id WHERE ca.article_id = ?', [$articleId]);
+    }
+    
+    /**
      * @param int $id
      * @return Category
      */
