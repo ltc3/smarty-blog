@@ -3,22 +3,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use Core\Container;
 use Core\Controller;
 use Core\Http\Request;
 use Core\Http\Router;
 use Smarty\Smarty;
 
-class Application extends Container
+class Application extends \Core\Application
 {
-    /**
-     * @param array $config
-     */
-    public function __construct(public readonly array $config)
-    {
-        parent::__construct($config['factories'] ?? []);
-    }
-    
     /**
      * 
      */
@@ -38,6 +29,13 @@ class Application extends Container
         $view = $this->get(Smarty::class);
         
         try {
+            // Hack for built-in web server
+            if (is_file(WEBROOT . $request->uri)) {
+                header('Content-type: image/jpeg');
+                readfile(WEBROOT . $request->uri);
+                return;
+            }
+            
             /**
              * @var Controller $controller
              */

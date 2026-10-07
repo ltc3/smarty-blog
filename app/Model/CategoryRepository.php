@@ -41,4 +41,43 @@ class CategoryRepository extends Repository
     {
         return $this->findOne('SELECT * FROM categories WHERE id = ?', [$id]);
     }
+    
+    /**
+     * @param Category ...$categories
+     * @return bool
+     */
+    public function create(Category ...$categories): bool
+    {
+        if (!count($categories)) {
+            return false;
+        }
+        
+        $placeholders = implode(',', array_fill(0, count($categories), '(?, ?, ?)'));
+        $params = array_merge(...array_map(fn($category) => [$category->id, $category->name, $category->description], $categories));
+        return $this->execute("INSERT INTO categories (id, name, description) VALUES {$placeholders}", $params);
+    }
+    
+    /**
+     * @param int $categoryId
+     * @param int ...$articleIds
+     * @return boolean
+     */
+    public function link(int $categoryId, int ...$articleIds)
+    {
+        if (!count($articleIds)) {
+            return false;
+        }
+        
+        $placeholders = implode(',', array_fill(0, count($articleIds), '?'));
+        $params = [$categoryId, ...$articleIds];
+        return $this->execute("INSERT INTO categories_articles (category_id, article_id) SELECT ?, id FROM articles WHERE id IN ({$placeholders})", $params);
+    }
+    
+    /**
+     * @return bool
+     */
+    public function truncate(): bool
+    {
+        return $this->execute('TRUNCATE categories') && $this->execute('TRUNCATE categories_articles');
+    }
 }

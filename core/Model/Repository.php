@@ -25,7 +25,9 @@ abstract class Repository
     {
         $stmt = $this->prepare($query, $params);
         $stmt->execute();
-        return $stmt->fetchObject($this->getEntityClass()) ?: null;
+        $class = $this->getEntityClass();
+        $params = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return !!$params ? new $class(...$params) : null;
     }
     
     /**
@@ -37,8 +39,11 @@ abstract class Repository
     {
         $stmt = $this->prepare($query, $params);
         $stmt->execute();
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->getEntityClass());
-        return $stmt;
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        $class = $this->getEntityClass();
+        foreach ($stmt as $params) {
+            yield new $class(...$params);
+        }
     }
     
     /**

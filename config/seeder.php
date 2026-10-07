@@ -1,0 +1,55 @@
+<?php
+
+return [
+    'categories' => [
+        'Politics',
+        'Economics',
+        'Tourism',
+        'Media',
+        'Science',
+    ],
+    'subjects' => [
+        'Donald Trump',
+        'Vladimir Putin',
+        'Pope of Rome',
+        'Garden Gnome',
+        'Greta Thunberg',
+        'Mickey Mouse',
+        'Lady Gaga',
+        'Michael Jackson',
+        'Baby Jesus',
+    ],
+    'actions' => [
+        'opens',
+        'closes',
+        'forbids',
+        'accepts',
+        'discuss',
+        'critique',
+        'advertise',
+    ],
+    'modifiers' => [
+        'urgently',
+        'desperately',
+        'decisevly',
+        'carefully',
+        'vividly',
+    ],
+    'objects' => [
+        'Straight of Hormus',
+        'Northern Pole',
+        'Gates of Hell',
+        'Taco Bell',
+        'Universe',
+        'Outer Space',
+        'Artificial Intelligence',
+        'UN',
+        'Moon base',
+        'Theme park',
+    ],
+    'images' => [
+        '/images/1.jpg',
+        '/images/2.jpg',
+        '/images/3.jpg',
+    ],
+];

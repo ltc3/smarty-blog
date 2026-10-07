@@ -1,6 +1,6 @@
 <?php
 
-use App\Application;
+use Core\Application;
 use Core\Http\Request;
 use Core\Http\Router;
 use Smarty\Smarty;

@@ -6,37 +6,21 @@ namespace App\Model;
 class Article
 {
     /**
-     * @var int
+     * @param int $id
+     * @param string $name
+     * @param string $description
+     * @param string $text
+     * @param string $image
+     * @param int $views
+     * @param string $published_at
      */
-    public readonly int $id;
-    
-    /**
-     * @var string
-     */
-    public readonly string $name;
-    
-    /**
-     * @var string
-     */
-    public readonly string $description;
-    
-    /**
-     * @var string
-     */
-    public readonly string $text;
-    
-    /**
-     * @var string
-     */
-    public readonly string $image;
-    
-    /**
-     * @var int
-     */
-    public readonly int $views;
-    
-    /**
-     * @var string
-     */
-    public readonly string $published_at;
+    public function __construct(
+        public readonly int $id,
+        public readonly string $name,
+        public readonly string $description,
+        public readonly string $text,
+        public readonly string $image,
+        public readonly int $views,
+        public readonly string $published_at)
+    {}
 }

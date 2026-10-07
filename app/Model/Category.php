@@ -6,17 +6,13 @@ namespace App\Model;
 class Category
 {
     /**
-     * @var int
+     * @param int $id
+     * @param string $name
+     * @param string $description
      */
-    public readonly int $id;
-    
-    /**
-     * @var string
-     */
-    public readonly string $name;
-    
-    /**
-     * @var string
-     */
-    public readonly string $description;
+    public function __construct(
+        public readonly int $id,
+        public readonly string $name,
+        public readonly string $description)
+    {}
 }

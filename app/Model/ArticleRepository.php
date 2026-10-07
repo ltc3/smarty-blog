@@ -31,7 +31,7 @@ class ArticleRepository extends Repository
      */
     public function findRecent(int $count = 3): iterable
     {
-        return $this->findMany('SELECT id, name FROM articles ORDER BY published_at DESC LIMIT ?', [$count]);
+        return $this->findMany('SELECT * FROM articles ORDER BY published_at DESC LIMIT ?', [$count]);
     }
     
     /**
@@ -59,7 +59,7 @@ class ArticleRepository extends Repository
         $offset = ($page - 1) * $limit;
         
         return $this->findMany("
-            SELECT a.id, a.name
+            SELECT a.*
             FROM articles a
             INNER JOIN categories_articles ca ON ca.article_id = a.id
             WHERE ca.category_id = ?
@@ -76,7 +76,7 @@ class ArticleRepository extends Repository
     public function findSimilar(int $articleId, int $count = 3): iterable
     {
         return $this->findMany('
-            SELECT a.id, a.name
+            SELECT a.*
             FROM categories_articles ca1
             INNER JOIN categories_articles ca2 ON ca2.category_id = ca1.category_id AND ca2.article_id != ca1.article_id
             INNER JOIN articles a ON a.id = ca2.article_id
@@ -94,5 +94,28 @@ class ArticleRepository extends Repository
     public function updateViews(int $articleId): bool
     {
         return $this->execute('UPDATE articles SET views = views + 1 WHERE id = ?', [$articleId]);
+    }
+    
+    /**
+     * @param Article ...$articles
+     * @return bool
+     */
+    public function create(Article ...$articles): bool
+    {
+        if (!count($articles)) {
+            return false;
+        }
+        
+        $placeholders = implode(',', array_fill(0, count($articles), '(?, ?, ?, ?, ?, 0, NOW())'));
+        $params = array_merge(...array_map(fn($article) => [$article->id, $article->name, $article->description, $article->text, $article->image], $articles));
+        return $this->execute("INSERT INTO articles (id, name, description, text, image, views, published_at) VALUES {$placeholders}", $params);
+    }
+    
+    /**
+     * @return bool
+     */
+    public function truncate(): bool
+    {
+        return $this->execute('TRUNCATE articles');
     }
 }
