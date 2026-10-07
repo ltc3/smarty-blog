@@ -55,7 +55,11 @@ class Application extends Container
             $view->assign('code', $exception->getCode());
             $view->display('error.tpl');
         } catch (\Throwable $throwable) {
-            $view->assign('message', 'Internal server error');
+            if ($this->config['debug']) {
+                $view->assign('message', $throwable->getMessage());
+            } else {
+                $view->assign('message', 'Internal server error');
+            }
             $view->assign('code', \Core\Http\Exception::INTERNAL_SERVER_ERROR);
             $view->display('error.tpl');           
         }
